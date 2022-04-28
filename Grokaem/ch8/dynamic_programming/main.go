@@ -24,15 +24,25 @@ func main() {
 	// var minWeight float64 = 1
 	// var maxWeight float64 = 4
 
+	// shop := []Item{
+	// 	{"WA", 7, 0.5},
+	// 	{"TG", 6, 0.5},
+	// 	{"NG", 9, 1},
+	// 	{"BM", 9, 2},
+	// 	{"SP", 8, 0.5},
+	// }
+	// var minWeight float64 = .5
+	// var maxWeight float64 = 2
+
 	shop := []Item{
-		{"WA", 7, 0.5},
-		{"TG", 6, 0.5},
-		{"NG", 9, 1},
-		{"BM", 9, 2},
-		{"SP", 8, 0.5},
+		{"water", 10, 3},
+		{"book", 3, 1},
+		{"food", 9, 2},
+		{"jacket", 5, 2},
+		{"camera", 6, 1},
 	}
-	var minWeight float64 = .5
-	var maxWeight float64 = 2
+	var minWeight float64 = 1
+	var maxWeight float64 = 6
 
 	countCol := int(maxWeight / minWeight)
 	matrix := createMatrix(len(shop), countCol)
@@ -41,7 +51,7 @@ func main() {
 
 	result := matrix.DynamicProgramm()
 	fmt.Printf("купить: %s на цену: %v\n", result.name, result.cost)
-	matrix.printMatrix()
+	//matrix.printMatrix()
 }
 
 func createMatrix(rows, cols int) *Matrix {
