@@ -15,14 +15,24 @@ type Item struct {
 }
 
 func main() {
+	// shop := []Item{
+	// 	{"Magniphone", 3000, 4},
+	// 	{"Nout", 2000, 3},
+	// 	{"Guitar", 1500, 1},
+	// 	{"IPhone", 2000, 1},
+	// }
+	// var minWeight float64 = 1
+	// var maxWeight float64 = 4
+
 	shop := []Item{
-		{"Magniphone", 3000, 4},
-		{"Nout", 2000, 3},
-		{"Guitar", 1500, 1},
-		{"IPhone", 2000, 1},
+		{"WA", 7, 0.5},
+		{"TG", 6, 0.5},
+		{"NG", 9, 1},
+		{"BM", 9, 2},
+		{"SP", 8, 0.5},
 	}
-	var minWeight float64 = 1
-	var maxWeight float64 = 4
+	var minWeight float64 = .5
+	var maxWeight float64 = 2
 
 	countCol := int(maxWeight / minWeight)
 	matrix := createMatrix(len(shop), countCol)
@@ -31,7 +41,7 @@ func main() {
 
 	result := matrix.DynamicProgramm()
 	fmt.Printf("купить: %s на цену: %v\n", result.name, result.cost)
-	//matrix.printMatrix()
+	matrix.printMatrix()
 }
 
 func createMatrix(rows, cols int) *Matrix {
@@ -62,11 +72,12 @@ func (m *Matrix) maxValue(row, col int) Item {
 	var max2 Item
 	var max1 Item
 
-	if row > 1 {
-		max1 = m.cell[row-1][col]
+	if row > 0 {
+		max1.cost = m.cell[row-1][col].cost
+		max1.name = m.cell[row-1][col].name
 	}
 
-	if col-int(m.items[row].weight/m.weight) > -1 && row > 1 {
+	if col-int(m.items[row].weight/m.weight) > -1 && row > 0 {
 		max2.cost = m.items[row].cost + m.cell[row-1][col-int(m.items[row].weight/m.weight)].cost
 		max2.name = m.items[row].name + " " + m.cell[row-1][col-int(m.items[row].weight/m.weight)].name
 	} else {
